@@ -8,7 +8,13 @@ public class Pelicula {
 	private Genero genero;
 	
 	public Pelicula(String Titulo, String Director, int Anno, String Sinopsis, Genero Genero) {
-		this.titulo = Titulo;
+		if(Anno < 0) {
+			this.anno = -1;
+		}
+		else {
+			this.titulo = Titulo;
+		}
+		
 		this.director = Director;
 		this.anno = Anno;
 		this.sinopsis = Sinopsis;

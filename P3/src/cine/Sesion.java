@@ -1,34 +1,35 @@
 package cine;
-
+import java.time.*;
 
 /**
  * @author eps
  *
  */
 public class Sesion {
-	private Fecha fecha;
+	private LocalDate fecha;
 	private Pelicula pelicula;
 	private int butacasDisponibles;
 	
 	
 	/**
-	 * @param fecha
+	 * @param dia
+	 * @param mes
+	 * @param anno
 	 * @param pelicula
 	 * @param sala
 	 */
-	public Sesion(Fecha fecha, Pelicula pelicula, int butacasDisponibles) {
-		this.fecha = fecha;
+	public Sesion(int dia, int mes, int anno, Pelicula pelicula, int butacasDisponibles) {
+		this.fecha = LocalDate.of(anno, mes, dia);
 		this.pelicula = pelicula;
 		this.butacasDisponibles = butacasDisponibles;
-		
 	}
 	
-	
+
 	
 	/**
-	 * @return the fecha
+	 * @return fecha
 	 */
-	public Fecha getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
@@ -37,7 +38,7 @@ public class Sesion {
 	/**
 	 * @param fecha the fecha to set
 	 */
-	public void setFecha(Fecha fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 
@@ -78,11 +79,6 @@ public class Sesion {
 	}
 
 
-
-	
-
-
-
 	/**
 	 * @param butacas
 	 * @return
@@ -95,11 +91,9 @@ public class Sesion {
 	
 		
 	public String mostrarSesion() {
-		String s = "Fecha : " + fecha + "\n" + "Pelicula : " + pelicula.getTitulo() + "\n" + "Butacas Disponibles : " + butacasDisponibles + "\n";
+		String s = "Fecha : " + fecha.toString() + "\n" + "Pelicula : " + pelicula.getTitulo() + "\n" + "Butacas Disponibles : " + butacasDisponibles + "\n";
 		return s;
 	}
-	
-	
 	
 	
 	

@@ -48,7 +48,7 @@ public class Sala {
 	
 	public Boolean addSesion(Sesion sesion) {
 		for(Sesion s : sesiones) {
-			if((s.getFecha().equals(sesion.getFecha())) == true){
+			if((s.getFecha().compareTo(sesion.getFecha())) == 0){
 				return false;
 			}
 		}

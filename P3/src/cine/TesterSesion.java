@@ -7,13 +7,10 @@ public class TesterSesion {
 	public static void main(String[] args) {
 		Genero g = Genero.DRAMA;
 		Pelicula p = new Pelicula("Juan Callate","Lucia Rivas",2018,"La trepidante historia de un bebe que no se callaba la boca",g);
-		Fecha f1 = new Fecha(2018,3,1);
-		Fecha f2 = new Fecha(2018,2,3);
-		Fecha f3 = new Fecha(2018,1,2);
 		Sala s = new Sala(0, 50);
-		Sesion s1 = new Sesion(f1,p,s.getButacas());
-		Sesion s2 = new Sesion(f2,p,s.getButacas());
-		Sesion s3 = new Sesion(f3,p,s.getButacas());
+		Sesion s1 = new Sesion(1, 2, 2018, p, s.getButacas());
+		Sesion s2 = new Sesion(28, 4, 2018, p,s.getButacas());
+		Sesion s3 = new Sesion(4, 9, 2020, p,s.getButacas());
 		s.addSesion(s1);
 		s.addSesion(s2);
 		s.addSesion(s3);
