@@ -90,9 +90,9 @@ public class Sesion {
 	}
 	
 		
-	public String mostrarSesion() {
-		String s = "Fecha : " + fecha.toString() + "\n" + "Pelicula : " + pelicula.getTitulo() + "\n" + "Butacas Disponibles : " + butacasDisponibles + "\n";
-		return s;
+	public void mostrarSesion() {
+		System.out.println("Fecha : " + fecha.toString() + "\n" + "Pelicula : " + pelicula.getTitulo() + "\n" + "Butacas Disponibles : " + butacasDisponibles + "\n\n");
+		
 	}
 	
 	

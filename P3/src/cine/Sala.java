@@ -30,14 +30,7 @@ public class Sala {
 		return butacas;
 	}
 
-	/**
-	 * @param butacas
-	 */
-	public void setButacas(int butacas) {
-		this.butacas = butacas;
-	}
-
-	
+		
 	public List<Sesion> getSesiones() {
 		return sesiones;
 	}
@@ -56,7 +49,13 @@ public class Sala {
 		return true;
 	}
 	
-	
+	public void mostrarSala() {
+		System.out.println("Sala " + identificador + ", " + butacas + " butacas\n" + "Sesiones :\n");
+		for(Sesion s: sesiones) {
+			s.mostrarSesion();
+			
+		}
+	}
 	
 	
 }
