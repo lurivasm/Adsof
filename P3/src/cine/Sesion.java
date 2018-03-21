@@ -2,6 +2,7 @@ package cine;
 import java.time.*;
 
 /**
+ * Clase Sesion
  * @author Lucia Rivas Molina <lucia.rivasmolina@estudiante.uam.es>
  * @author Daniel Santo-Tomás López <daniel.santo-tomas@estudiante.uam.es>
  *
@@ -13,6 +14,7 @@ public class Sesion {
 	
 	
 	/**
+	 * Constructor de Sesion
 	 * @param dia de la sesion
 	 * @param mes de la sesion
 	 * @param anno de la sesion
@@ -37,7 +39,7 @@ public class Sesion {
 
 
 	/**
-	 * @param fecha the fecha to set
+	 * @param fecha de la sesion
 	 */
 	public void setFecha(int dia, int mes, int anno) {
 		this.fecha = LocalDate.of(anno, mes, dia);
@@ -81,7 +83,8 @@ public class Sesion {
 
 
 	/**
-	 * @param butacas de la sesion
+	 * Devuelve false si queremos comprar mas entradas de las disponibles
+	 * @param butacas que queremos comprar
 	 * @return boolean
 	 */
 	public Boolean disminuirButacasDisponibles(int butacas) {
@@ -91,6 +94,9 @@ public class Sesion {
 	}
 	
 		
+	/**
+	 * Muestra la sesion completa con todos sus atributos
+	 */
 	public void mostrarSesion() {
 		System.out.println("Fecha : " + fecha.toString() + "\n" + "Pelicula : " + pelicula.getTitulo() + "\n" + "Butacas Disponibles : " + butacasDisponibles + "\n\n");
 		

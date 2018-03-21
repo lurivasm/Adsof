@@ -4,13 +4,16 @@
 package cine;
 
 /**
- * @author eps
+ * Clase EntradaDiaEspectador
+ * @author Lucia Rivas Molina <lucia.rivasmolina@estudiante.uam.es>
+ * @author Daniel Santo-Tomás López <daniel.santo-tomas@estudiante.uam.es>
  *
  */
 public class EntradaDiaEspectador extends Entrada {
 	
 	private int descuento;
 	/**
+	 * 
 	 * @param precio
 	 */
 	public EntradaDiaEspectador(double precio, int descuento) {
@@ -25,8 +28,28 @@ public class EntradaDiaEspectador extends Entrada {
 		
 	}
 	
+	/**
+	 * Getter del descuento
+	 * @return descuento de la entrada especial
+	 */
+	public int getDescuento() {
+		return descuento;
+	}
+
+	/**
+	 * Setter del descuento
+	 * @param descuento de la entrada especial
+	 */
+	public void setDescuento(int descuento) {
+		this.descuento = descuento;
+	}
+
+	/**
+	 * Getter del precio total
+	 * @return precio final con descuento de la entrada especial
+	 */
 	public double getPrecio() {
-		return (precio*descuento/100);
+		return (precio - precio*descuento/100);
 	}
 
 	

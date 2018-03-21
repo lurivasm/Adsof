@@ -18,6 +18,7 @@ public class Cartelera {
 	
 	/**
 	 * Constructor de cartelera
+	 * Crea una lista vacia de peliculas
 	 */
 	public Cartelera() {
 		this.listaPeliculas = new ArrayList<Pelicula>();
@@ -31,18 +32,11 @@ public class Cartelera {
 	public List<Pelicula> getListaPeliculas() {
 		return listaPeliculas;
 	}
-
-	
-	/**
-	 * 
-	 * @param listaPeliculas
-	 */
-	public void setListaPeliculas(List<Pelicula> listaPeliculas) {
-		this.listaPeliculas = listaPeliculas;
-	}
 	
 	
 	/**
+	 * Agrega una pelicula a la lista de la cartelera
+	 * Sustituye, junto con eliminaPelicula al setter de la lista para su mayor facilidad
 	 * 
 	 * @param Titulo de la pelicula
 	 * @param Director de la pelicula
@@ -78,6 +72,8 @@ public class Cartelera {
 	
 	
 	/**
+	 * Elimina una pelicula de la lista de la cartelera
+	 * Sustituye, junto con addPelicula al setter de la lista para su mayor facilidad
 	 * Si la pelicula no esta devuelve false
 	 * @param titulo de la pelicula a eliminar
 	 * @return boolean
