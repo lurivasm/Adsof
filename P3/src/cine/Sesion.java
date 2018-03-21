@@ -2,7 +2,8 @@ package cine;
 import java.time.*;
 
 /**
- * @author eps
+ * @author Lucia Rivas Molina <lucia.rivasmolina@estudiante.uam.es>
+ * @author Daniel Santo-Tomás López <daniel.santo-tomas@estudiante.uam.es>
  *
  */
 public class Sesion {
@@ -12,11 +13,11 @@ public class Sesion {
 	
 	
 	/**
-	 * @param dia
-	 * @param mes
-	 * @param anno
-	 * @param pelicula
-	 * @param sala
+	 * @param dia de la sesion
+	 * @param mes de la sesion
+	 * @param anno de la sesion
+	 * @param pelicula de la sesion
+	 * @param sala de la sesion
 	 */
 	public Sesion(int dia, int mes, int anno, Pelicula pelicula, int butacasDisponibles) {
 		this.fecha = LocalDate.of(anno, mes, dia);
@@ -27,7 +28,7 @@ public class Sesion {
 
 	
 	/**
-	 * @return fecha
+	 * @return fecha de la sesion
 	 */
 	public LocalDate getFecha() {
 		return fecha;
@@ -38,14 +39,14 @@ public class Sesion {
 	/**
 	 * @param fecha the fecha to set
 	 */
-	public void setFecha(LocalDate fecha) {
-		this.fecha = fecha;
+	public void setFecha(int dia, int mes, int anno) {
+		this.fecha = LocalDate.of(anno, mes, dia);
 	}
 
 
 
 	/**
-	 * @return the pelicula
+	 * @return pelicula de la sesion
 	 */
 	public Pelicula getPelicula() {
 		return pelicula;
@@ -54,7 +55,7 @@ public class Sesion {
 
 
 	/**
-	 * @param pelicula the pelicula to set
+	 * @param pelicula de la sesion
 	 */
 	public void setPelicula(Pelicula pelicula) {
 		this.pelicula = pelicula;
@@ -63,7 +64,7 @@ public class Sesion {
 
 
 	/**
-	 * @return the butacasDisponibles
+	 * @return butacas disponibles de la sesion
 	 */
 	public int getButacasDisponibles() {
 		return butacasDisponibles;
@@ -80,8 +81,8 @@ public class Sesion {
 
 
 	/**
-	 * @param butacas
-	 * @return
+	 * @param butacas de la sesion
+	 * @return boolean
 	 */
 	public Boolean disminuirButacasDisponibles(int butacas) {
 		if((butacasDisponibles - butacas) < 0) return false;
