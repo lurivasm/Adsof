@@ -168,6 +168,11 @@ public class Cine {
 	 * @return true si se vende correctamente,false en caso contrario
 	 */
 	public Boolean venderEntradas(int sala, String pelicula, int dia , int mes, int anno,  int nentradas, double precio, int descuento) {
+		if(listaSalas.size() < sala) {
+			System.out.println("No existe la sala " + sala);
+			return false;
+		}
+		
 		List<Entrada> e = new ArrayList<Entrada>();
 		if(descuento > 0) {	
 			Entrada en =  new EntradaDiaEspectador(precio, descuento);
@@ -183,7 +188,7 @@ public class Cine {
 			}
 		}
 		
-		Sala sal = listaSalas.get(sala);
+		Sala sal = listaSalas.get(sala-1);
 		
 		for(Sesion ses : sal.getSesiones()) {
 			if(ses.compareSesion(pelicula,dia, mes ,anno) == true) {
@@ -196,6 +201,7 @@ public class Cine {
 						listaEntradas.add(e.get(i));
 					}			
 				}
+				System.out.println("Entradas para la pelicula " + pelicula + " en la sala " + sala+ " en la fecha " + anno + "-" + mes + "-" + dia + " vendidas con exito\n");
 				return true;
 			}
 		}
