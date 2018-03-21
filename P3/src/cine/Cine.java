@@ -180,7 +180,7 @@ public class Cine {
 		
 		for(Sala sal : listaSalas) {
 			for(Sesion ses : sal.getSesiones()) {
-				if(ses.equals(s)) {
+				if(ses.compareSesion(s) == true) {
 					if(s.disminuirButacasDisponibles(nentradas) == false) {
 						System.out.println("No se pueden vender "+ nentradas + " para la sesion pedida\n");
 						return false;
@@ -230,7 +230,7 @@ public class Cine {
 		for(Sala sal : listaSalas) {
 			int cont = 0;
 			for(Sesion ses : sal.getSesiones()) {
-				if(ses.getPelicula().getTitulo().equals(Titulo)) {
+				if(ses.getPelicula().getTitulo().equals(Titulo) == true) {
 					sal.getSesiones().remove(ses);
 					cont++;
 				}

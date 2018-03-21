@@ -47,8 +47,11 @@ public class Cartelera {
 	 */
 	public Boolean addPelicula(String Titulo, String Director, int Anno, String Sinopsis, Genero Genero) {
 		Pelicula p = new Pelicula( Titulo, Director, Anno, Sinopsis, Genero);
-		if(p.getAnno() == -1) {
-			return false;
+		
+		for(Pelicula pel : listaPeliculas) {
+			if(pel.getTitulo().equals(Titulo) == true) {
+				return false;
+			}
 		}
 		
 		listaPeliculas.add(p);		

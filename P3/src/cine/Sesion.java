@@ -102,6 +102,15 @@ public class Sesion {
 		
 	}
 	
+	public Boolean compareSesion(Sesion s) {
+		if(s.getPelicula().getTitulo().equals(pelicula.getTitulo()) == true) {
+			if(s.getFecha().isEqual(fecha) == true) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 	
 }
