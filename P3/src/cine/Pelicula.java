@@ -122,7 +122,7 @@ public class Pelicula {
 	 * Mostrar la pelicula completa con todos sus datos
 	 */
 	public void mostrarPelicula() {
-		System.out.println("Titulo : " + titulo + "\n" + "Director : " + director + "\n" + "Año : " + anno + "\n" + "Sinopsis : " + sinopsis + "\n" + "Genero : " + genero.name() + "\n");
+		System.out.println("Titulo : " + titulo + "\n" + "Director : " + director + "\n" + "Anno : " + anno + "\n" + "Sinopsis : " + sinopsis + "\n" + "Genero : " + genero.name() + "\n");
 		
 	}
 	
