@@ -5,28 +5,91 @@ package cine;
 import java.util.*;
 
 /**
- * @author eps
+ * @author Lucia Rivas Molina <lucia.rivasmolina@estudiante.uam.es>
+ * @author Daniel Santo-Tomás López <daniel.santo-tomas@estudiante.uam.es>
  *
  */
 public class Cine {
 	
+	
+
 	private String nombre;
 	private String direccion;
-	private List<Pelicula> listaPeliculas = new ArrayList<Pelicula>();
+	private Cartelera cartelera = new Cartelera();
 	private List<Sala> listaSalas = new ArrayList<Sala>();
 	private List<Entrada> listaEntradas = new ArrayList<Entrada>(); /*Lista de entradas vendidass*/
 	
 	/**
-	 * @param nombre
-	 * @param direccion
-	 * @param numSalas
+	 * @param nombre del  cine
+	 * @param direccion del cine
 	 */
 	public Cine(String nombre, String direccion) {
 		this.nombre = nombre;
 		this.direccion = direccion;	
 	}
 	
+	
+	/**
+	 * @return el nombre del cine
+	 */
+	public String getNombre() {
+		return nombre;
+	}
 
+
+	/**
+	 * @return la direccion del cine
+	 */
+	public String getDireccion() {
+		return direccion;
+	}
+
+
+	/**
+	 * @return la cartelera del cine
+	 */
+	public Cartelera getCartelera() {
+		return cartelera;
+	}
+
+
+	/**
+	 * @return la lista de las salas
+	 */
+	public List<Sala> getListaSalas() {
+		return listaSalas;
+	}
+
+
+	/**
+	 * @return la lista de las entradas
+	 */
+	public List<Entrada> getListaEntradas() {
+		return listaEntradas;
+	}
+
+	
+
+	/**
+	 * @param nueva direccion del cine
+	 */
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	
+	/**
+	 * @param nombre the nombre to set
+	 */
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	/**
+	 * @param butacas
+	 * @return
+	 */
 	public Boolean addSala(int butacas) {
 		int id = listaSalas.size();
 		Sala s = new Sala(id+1, butacas);
@@ -37,7 +100,7 @@ public class Cine {
 	
 	
 	public Boolean nuevaSesion(String Titulo, int dia, int mes, int anno, int sala)	{
-		for(Pelicula p : listaPeliculas) {
+		for(Pelicula p : cartelera.getListaPeliculas()) {
 			if( (p.getTitulo().equals(Titulo)) == true) {				
 				for(Sala s : listaSalas) {
 					if(s.getIdentificador() == sala) {
@@ -59,19 +122,99 @@ public class Cine {
 	}
 	
 	public Boolean addPelicula(String Titulo, String Director, int Anno, String Sinopsis, Genero Genero) {
-		Pelicula p = new Pelicula( Titulo, Director, Anno, Sinopsis, Genero);
-		if(p.getAnno() == -1) {
+		if(cartelera.addPelicula(Titulo, Director, Anno, Sinopsis, Genero) == false) {
 			System.out.println("Error añadiendo la pelicula\n");
 			return false;
 		}
-		
-		listaPeliculas.add(p);
 		System.out.println("Pelicula añadida con exito\n");
 		
 		return true;
 	}
 	
 	
-	public Boolean venderEntradas()
+	public Boolean venderEntradas(Sesion s, int nentradas, double precio, int descuento) {
+		List<Entrada> e = new ArrayList<Entrada>();
+		if(descuento > 0) {	
+			Entrada en =  new EntradaDiaEspectador(precio, descuento);
+			for(int i = 0; i < nentradas; i++) {
+				 e.add(en);
+			}
+			
+		}
+		else {	
+			Entrada en = new Entrada(precio);
+			for(int i = 0; i < nentradas; i++) {
+				e.add(en);
+			}
+		}
+		
+		for(Sala sal : listaSalas) {
+			for(Sesion ses : sal.getSesiones()) {
+				if(ses.equals(s)) {
+					if(s.disminuirButacasDisponibles(nentradas) == false) {
+						System.out.println("No se pueden vender "+ nentradas + " para la sesion pedida\n");
+						return false;
+					}
+					else {
+						for(int i = 0; i < nentradas; i++) {
+							listaEntradas.add(e.get(i));
+						}			
+					}
+					return true;
+				}
+			}
+		}
+		System.out.println("No existe la sesion \n");
+		return false;
+		
+	}
+	
+	
+	public double getRecaudacion() {
+		double rec = 0;
+		for(Entrada e : listaEntradas) {
+			rec += e.getPrecio(); 
+		}
+		return rec;
+	}
+	
+	
+	
+	
+	public Boolean removePelicula(String Titulo) {
+		if(cartelera.eliminaPelicula(Titulo) == false) {
+			System.out.println("La pelicula " + Titulo + " no esta en la cartelera");
+			return false;
+		}
+		
+		System.out.println("Eliminada la pelicula " + Titulo + " de las siguientes salas:\n");
+		for(Sala sal : listaSalas) {
+			int cont = 0;
+			for(Sesion ses : sal.getSesiones()) {
+				if(ses.getPelicula().getTitulo().equals(Titulo)) {
+					sal.getSesiones().remove(ses);
+					cont++;
+				}
+			}
+			System.out.println("Sala " + sal.getIdentificador() + "\n Eliminadas " + cont + " sesiones\n");
+		}
+		return true;
+	}
+		
+		
+	
+
+	
+	
+	public void mostrarCine() {
+		System.out.println("Cines " + nombre + " , " + direccion +"\n Cartelera y Sesiones : \n");
+		for(Sala s : listaSalas) {
+			s.mostrarSala();
+		}
+	}
+	
+	
+
+	
 	
 }

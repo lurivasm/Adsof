@@ -15,11 +15,19 @@ public class EntradaDiaEspectador extends Entrada {
 	 */
 	public EntradaDiaEspectador(double precio, int descuento) {
 		super(precio);
+		if(descuento < 0) {
+			descuento = -descuento;
+		}
+		while(descuento > 100) {
+			descuento = descuento - 100;
+		}
 		this.descuento = descuento;
+		
 	}
 	
 	public double getPrecio() {
 		return (precio*descuento/100);
 	}
 
+	
 }

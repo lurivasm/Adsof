@@ -20,7 +20,7 @@ public class TesterPelicula {
 		System.out.println("Creando pelicula introduciendo un numero negativo como año...\n");
 		Pelicula p2 = new Pelicula("Kingsman:The Secret Service", "Matthew Vaughn",-2014,"Cosas de espias ingleses",Genero.ACCION);
 		if(p2.getAnno() == -1) {
-			System.out.println("Pelicula con año invalido");
+			System.out.println("Pelicula con anio invalido");
 			
 		}
 		
