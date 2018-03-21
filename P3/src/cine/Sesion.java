@@ -4,7 +4,7 @@ import java.time.*;
 /**
  * Clase Sesion
  * @author Lucia Rivas Molina <lucia.rivasmolina@estudiante.uam.es>
- * @author Daniel Santo-Tomás López <daniel.santo-tomas@estudiante.uam.es>
+ * @author Daniel Santo-Tomï¿½s Lï¿½pez <daniel.santo-tomas@estudiante.uam.es>
  *
  */
 public class Sesion {
@@ -102,9 +102,18 @@ public class Sesion {
 		
 	}
 	
-	public Boolean compareSesion(Sesion s) {
-		if(s.getPelicula().getTitulo().equals(pelicula.getTitulo()) == true) {
-			if(s.getFecha().isEqual(fecha) == true) {
+	/**
+	 * Compara la sesion con otra dados el titulo de la pelicula y la fecha de la otra sesion
+	 * @param Titulo
+	 * @param dia
+	 * @param mes
+	 * @param anno
+	 * @return true i son iguales,false si son distintos
+	 */
+	public Boolean compareSesion(String Titulo, int dia, int mes, int anno) {
+		LocalDate fech = LocalDate.of(anno, mes, dia);
+		if(Titulo.equals(pelicula.getTitulo()) == true) {
+			if(fech.isEqual(fecha) == true) {
 				return true;
 			}
 		}

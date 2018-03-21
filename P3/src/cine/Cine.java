@@ -6,7 +6,7 @@ import java.util.*;
 
 /**
  * @author Lucia Rivas Molina <lucia.rivasmolina@estudiante.uam.es>
- * @author Daniel Santo-Tomás López <daniel.santo-tomas@estudiante.uam.es>
+ * @author Daniel Santo-Tomï¿½s Lï¿½pez <daniel.santo-tomas@estudiante.uam.es>
  *
  */
 public class Cine {
@@ -106,7 +106,7 @@ public class Cine {
 	 * @param dia de la sesion
 	 * @param mes de la sesion
 	 * @param anno de la sesion
-	 * @param identificador de la sala donde se aniadirá la sesion
+	 * @param identificador de la sala donde se aniadirï¿½ la sesion
 	 * @return true si se crea la sesion con exito,false en otrpo caso
 	 */
 	public Boolean nuevaSesion(String Titulo, int dia, int mes, int anno, int sala)	{
@@ -152,17 +152,22 @@ public class Cine {
 		return true;
 	}
 	
-	
+
+	 
 	/**
 	 * Vende una entrada para una sesion ,aniadiendola al array de entradas vendidas del cine y disminuyendo de la sala correspondiente el numero de entradas
 	 * Si el campo descuento es 0,se asume que la entrada es normal,si el campo descuento tiene un valor ,se asume que es entrada del dia del espectador
-	 * @param sesion de la cual se vende la entrada
-	 * @param numero de entradas a vender
-	 * @param precio de la entrada a vender
-	 * @param descuento de la entrada(0 si no tiene)
-	 * @return true si se vende con exito,false en caso contrario   
+	 * @param sala donde es la sesion
+	 * @param pelicula de la sesion
+	 * @param dia de la sesion
+	 * @param mes de la sesion
+	 * @param annio de la sesion
+	 * @param nentradas a vender
+	 * @param precio de las entradas
+	 * @param descuento de la entrada(0 si es normal)
+	 * @return true si se vende correctamente,false en caso contrario
 	 */
-	public Boolean venderEntradas(Sesion s, int nentradas, double precio, int descuento) {
+	public Boolean venderEntradas(int sala, String pelicula, int dia , int mes, int anno,  int nentradas, double precio, int descuento) {
 		List<Entrada> e = new ArrayList<Entrada>();
 		if(descuento > 0) {	
 			Entrada en =  new EntradaDiaEspectador(precio, descuento);
@@ -178,22 +183,23 @@ public class Cine {
 			}
 		}
 		
-		for(Sala sal : listaSalas) {
-			for(Sesion ses : sal.getSesiones()) {
-				if(ses.compareSesion(s) == true) {
-					if(s.disminuirButacasDisponibles(nentradas) == false) {
-						System.out.println("No se pueden vender "+ nentradas + " para la sesion pedida\n");
-						return false;
-					}
-					else {
-						for(int i = 0; i < nentradas; i++) {
-							listaEntradas.add(e.get(i));
-						}			
-					}
-					return true;
+		Sala sal = listaSalas.get(sala);
+		
+		for(Sesion ses : sal.getSesiones()) {
+			if(ses.compareSesion(pelicula,dia, mes ,anno) == true) {
+				if(ses.disminuirButacasDisponibles(nentradas) == false) {
+					System.out.println("No se pueden vender "+ nentradas + " para la sesion pedida\n");
+					return false;
 				}
+				else {
+					for(int i = 0; i < nentradas; i++) {
+						listaEntradas.add(e.get(i));
+					}			
+				}
+				return true;
 			}
 		}
+		
 		System.out.println("No existe la sesion \n");
 		return false;
 		
