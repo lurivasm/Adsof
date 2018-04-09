@@ -11,4 +11,5 @@ public class TerminalAritmetico extends Terminal {
 		INodo n = new TerminalAritmetico(simbolo);
 		return n;
 	}
+	
 }

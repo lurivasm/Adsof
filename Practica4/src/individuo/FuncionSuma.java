@@ -26,6 +26,12 @@ public class FuncionSuma extends Funcion{
 	}
 	public INodo copy() {
 		INodo n = new FuncionSuma(simbolo, descendientes.size());
+		for(INodo n1 : descendientes) {
+			n.incluirDescendiente(n1);
+		}
 		return n;
 	}
+	
+
 }
+

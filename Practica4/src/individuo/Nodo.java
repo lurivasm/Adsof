@@ -23,5 +23,16 @@ public abstract class Nodo implements INodo {
 	public List<INodo> getDescendientes(){
 		return descendientes;
 	}
+	/**
+	 * Esta funcion calcula cuantos nodos exactamente tiene este nodo por debajo, incluyendo nodos hijos, nietos etc.
+	 * @return
+	 */
+	public int getnumDescendientes() {
+		int res = 0;
+		for(INodo n : descendientes) {
+			res += n.getnumDescendientes();
+		}
+		return res + descendientes.size();
+	}
 	
 }

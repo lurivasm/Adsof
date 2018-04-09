@@ -15,5 +15,15 @@ public abstract class  Funcion extends Nodo{
 		descendientes.add(nodo);
 	}
 	
+	public String toString() {
+		String s = "";
+		for(INodo n : descendientes) {
+			s = s + n.toString();
+		}
+		for(int i = 1; i < descendientes.size() ; i++ ) {
+			s = simbolo + " "+ s;
+		}
+		return "( " + s + ") ";
+	}
 	
 }

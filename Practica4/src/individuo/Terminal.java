@@ -25,4 +25,7 @@ public abstract class Terminal extends Nodo {
 	public double calcular() {
 		return value;
 	}
+	public String toString() {
+		return simbolo + " ";
+	}
 }
