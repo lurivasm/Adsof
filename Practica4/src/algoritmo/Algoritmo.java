@@ -1,15 +1,18 @@
 package algoritmo;
 import individuo.*;
 import interfaces.*;
-
-import java.util.List;
-
+import java.util.*;
 import excepciones.*;
+
+/**
+ * @author danist
+ *
+ */
 public class Algoritmo implements IAlgoritmo{
 	private List<Terminal> terminales;
 	private List<Funcion> funciones;
 	private PruebaCruce p;
-	private List<IIndividuo> poblacion;
+	private List<IIndividuo> poblacion = new ArrayList<IIndividuo>();
 	private int profundidad;
 	private int individuos;
 	private int probCruce;
@@ -40,7 +43,12 @@ public class Algoritmo implements IAlgoritmo{
 
 	
 	public void crearPoblacion() {
-		
+		IIndividuo ind;
+		for(int i = 0; i < individuos; i++) {
+			ind = new Individuo();
+			ind.crearIndividuoAleatorio(profundidad, terminales, funciones);
+			poblacion.add(ind);
+		}
 		
 	}
 

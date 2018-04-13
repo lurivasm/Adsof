@@ -8,10 +8,15 @@ import java.util.*;
 import interfaces.*;
 
 /**
- * @author danist
- *
+ * Implementacion de a clase individuo
+ * @author Daniel Santo-Tomas daniel.santo-tomas@estudiante.uam.es
+ * @author Lucia Rivas Molina lucia.rivas@estudiante.uam.es 
  */
 public class Individuo implements IIndividuo{
+	
+	/**
+	 * Un individuo tiene un nod oexpresion(raiz) y un valor de fitness
+	 */
 	private INodo expresion;
 	private double fitness;
 	

@@ -6,8 +6,16 @@ import java.util.*;
 import java.io.*;
 import excepciones.*;
 
+/** Implemetacion de la clase DominioAritmetico
+ * @author Daniel Santo-Tomas daniel.santo-tomas@estudiante.uam.es
+ * @author Lucia Rivas Molina lucia.rivas@estudiante.uam.es 
+ */
 public class DominioAritmetico implements IDominio {
 	
+	
+	/**
+	 * Un dominio tiene una lista de valores y otra de resultados. El valor i tiene asignado el resultado i
+	 */
 	private List<String> valores = new ArrayList<String>();
 	private List<String> resultados = new ArrayList<String>();
 
