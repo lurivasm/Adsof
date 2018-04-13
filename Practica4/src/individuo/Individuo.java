@@ -19,7 +19,8 @@ public class Individuo implements IIndividuo{
 		return expresion;
 	}
 	public void setExpresion(INodo expresion) {
-		this.expresion = expresion;
+		this.expresion = expresion.copy();
+		this.expresion.setPadre(null);
 	}
 	public double getFitness() {
 		return fitness;
@@ -32,24 +33,48 @@ public class Individuo implements IIndividuo{
 		List<INodo> l1 =new ArrayList<INodo>((int)Math.pow(2, profundidad));
 		List<INodo> l2;
 		
-		for(int i = 0;i < l1.size(); i++){
-			l1.add(funciones.get(r.nextInt(funciones.size())));
+		/*Creamos una lista con todos los terminales. El tamaño de la lista depende de la profundidad*/
+		for(int i = 0;i < Math.pow(2, profundidad); i++){
+			l1.add(terminales.get(r.nextInt(terminales.size())).copy());
 		}
+		/*En este bucle, se crea una lista con funciones aleatorias del conjunto de funciones, y de tamaño dependiente de la profundidad.
+		 * A continuacion, se enlaza esta lista con la anterior, que corresponde a los nodos de la profundidad anterior.
+		 * De esta manera, vamos generando un arbol de abajo a arriba, hasta llegar al nodo raiz,que se establece como expresion del individuo
+		 */
 		for(int i = profundidad -1; i >= 0 ; i--) {
 			l2 = new ArrayList<INodo>((int)Math.pow(2, i));
 			int cont = 0;
 			for(int j = 0; j < Math.pow(2, i); j++) {
-				l2.add(terminales.get(r.nextInt(terminales.size())));
+				l2.add(funciones.get(r.nextInt(funciones.size())).copy());
 				l2.get(j).incluirDescendiente(l1.get(cont));
 				l2.get(j).incluirDescendiente(l1.get(cont +1));
 				cont += 2;
+				
 			}
 			l1 = l2;
 		}
 		expresion = l1.get(0);
 	}
 		
-	public double calcularExpresion();
-	public int getNumeroNodos();
-	public void writeIndividuo();
+	public double calcularExpresion() {
+		return expresion.calcular();
+	}
+	public int getNumeroNodos() {
+		return expresion.getnumDescendientes() + 1;
+	}
+	public void writeIndividuo() {
+		System.out.println("Expresion: " + expresion);
+	}
+	
+	public void setValorTerminales(double valor) {
+		expresion.setValorNodo(valor);
+	}
+	
+	public void etiquetaNodos() {
+		expresion.etiquetar(expresion.getnumDescendientes()+1);
+	}
+	
+	public INodo buscar(int etiqueta) {
+		return expresion.buscar(etiqueta);
+	}
 }

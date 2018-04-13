@@ -6,11 +6,16 @@ package individuo;
 import interfaces.*;
 
 /**
- * @author danist
- *
+ * Implementacion de la clase FuncionMultiplicacion
+ * @author Daniel Santo-Tomas daniel.santo-tomas@estudiante.uam.es
+ * @author Lucia Rivas Molina lucia.rivas@estudiante.uam.es 
  */
 public class FuncionMultiplicacion extends Funcion {
 	 
+	/**Constructor del objeto. LLama al constructor de funcion
+	 * @param s : simbolo del nodo
+	 * @param narg : numero de argumentos(descendientes) de la funcion
+	 */
 	public FuncionMultiplicacion(String s, int narg) {
 		super(s,narg);
 	}
@@ -23,9 +28,13 @@ public class FuncionMultiplicacion extends Funcion {
 	}
 	public INodo copy() {
 		INodo n = new FuncionMultiplicacion(simbolo, descendientes.size());
+		INodo nodo;
 		for(INodo n1 : descendientes) {
-			n.incluirDescendiente(n1);
+			nodo = n1.copy();
+			n.incluirDescendiente(nodo);
 		}
+		n.setPadre(padre);
+		n.setEtiqueta(etiqueta);
 		return n;
 	}
 
