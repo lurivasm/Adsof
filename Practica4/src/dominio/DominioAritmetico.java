@@ -78,7 +78,8 @@ public class DominioAritmetico implements IDominio {
 			individuo.setValorTerminales(Double.parseDouble(valores.get(i)));
 			res = individuo.calcularExpresion();
 			if(Math.abs(Double.parseDouble(resultados.get(i)) - res) <= 1) fit++;
-			System.out.println("Valor " + valores.get(i) +  " <-> Rdo estimado: " + res + " <-> Rdo real: " + resultados.get(i));
+			/*Para testear el test TesterLecturaYFitness hace falta descomentar la linea de abajo*/
+			/*System.out.println("Valor " + valores.get(i) +  " <-> Rdo estimado: " + res + " <-> Rdo real: " + resultados.get(i));*/
 		}
 		individuo.setFitness(fit);
 		return fit;

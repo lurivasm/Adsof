@@ -22,7 +22,7 @@ public class Prueba {
 		
 		 IIndividuo indiv1 = new Individuo();
 		 IIndividuo indiv2 = new Individuo();
-		 indiv1.crearIndividuoAleatorio(1,t,f);
+		 indiv1.crearIndividuoAleatorio(3,t,f);
 		 indiv2.crearIndividuoAleatorio(2, t, f);
 		 indiv1.writeIndividuo();
 		 System.out.println();
@@ -30,9 +30,7 @@ public class Prueba {
 		 
 		 indiv1.etiquetaNodos();
 		 indiv2.etiquetaNodos();
-			System.out.println( indiv1.getExpresion().getDescendientes().get(0).getEtiqueta());
-			System.out.println( indiv2.getExpresion().getDescendientes().get(0).getDescendientes().get(0).getEtiqueta());
-
+			
 	}
 
 }
