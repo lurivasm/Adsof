@@ -70,6 +70,7 @@ public class DominioAritmetico implements IDominio {
 		}
 		buffer.close();
 		
+		
 	}
 
 	public double calcularFitness(IIndividuo individuo) {

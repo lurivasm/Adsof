@@ -15,7 +15,7 @@ public class Algoritmo implements IAlgoritmo{
 	private int profundidad;
 	private int individuos;
 	private int maxgen;
-	
+	private int porCruce;
 	
 	
 	
@@ -23,10 +23,11 @@ public class Algoritmo implements IAlgoritmo{
 	 * @param profundidad
 	 * @param individuos
 	 */
-	public Algoritmo(int profundidad, int individuos, int maxgen) {
+	public Algoritmo(int profundidad, int individuos, int maxgen, int porCruce) {
 		this.profundidad = profundidad;
 		this.individuos = individuos;
 		this.maxgen = maxgen;
+		this.porCruce = porCruce;
 	}
 
 	public void defineConjuntoTerminales(List<Terminal> terminales) {
@@ -43,6 +44,7 @@ public class Algoritmo implements IAlgoritmo{
 		for(int i = 0; i < individuos; i++) {
 			ind = new Individuo();
 			ind.crearIndividuoAleatorio(profundidad, terminales, funciones);
+			ind.etiquetaNodos();
 			poblacion.add(ind);
 		}
 		
@@ -104,53 +106,57 @@ public class Algoritmo implements IAlgoritmo{
 
 	
 	public void crearNuevaPoblacion() throws Exception {
-		int i,maxpos = -1,minpos1 = -1,minpos2 = -1;
-		double max = 0.0,min1 = 11, min2 = 11;
-		/*buscamos el mejor individuo de la poblacion y los dos peores*/
+		int i,maxpos = -1;
+		double max = 0.0;
+		/*buscamos el mejor individuo de la poblacion*/
 		for(i = 0; i < poblacion.size(); i++) {
 			if(poblacion.get(i).getFitness() > max) {
 				maxpos = i;
 				max = poblacion.get(i).getFitness();
 			}
-			if(poblacion.get(i).getFitness() < min1) {
-				minpos1 = i;
-				min2 = min1;
-				min1 = poblacion.get(i).getFitness();
-			}
-			if(poblacion.get(i).getFitness() > min1 && poblacion.get(i).getFitness() < min2) {
-				minpos2 = i;
-				min2 = poblacion.get(i).getFitness();
-			}
 		}
 		
 		Random r = new Random();
-		int ind1,ind2;
-		
-		while(true) {
-			ind1 = r.nextInt(poblacion.size());
-			if(ind1 == maxpos || ind1 == minpos1 || ind1 == minpos2) continue;
-			break;
+		int ind;
+		int max_ind = porCruce*individuos/100;
+		/*Obtenemos la lista de max_ind a cruzar*/
+		List<IIndividuo> cruces = new ArrayList<IIndividuo>(max_ind);
+		for(i = 0; i < max_ind;i++) {
+			while(true) {
+				ind = r.nextInt(poblacion.size());
+				if(ind == maxpos || cruces.contains(poblacion.get(ind))) continue;
+				break;				
+			}
+			cruces.add(poblacion.get(ind));						
 		}
 		
-		while(true) {
-			ind2 = r.nextInt(poblacion.size());
-			if(ind2 == maxpos || ind2 == minpos1 || ind2 == minpos2 || ind2 == ind1) continue;
-			break;
-		}
+		/*Para cruzarles dos a dos, no aseguramos de que el tamaño de la lista es par, y si no lo es, quitamos un individuo*/
+		if(cruces.size()%2 == 1) cruces.remove(0);
 		
-		List<IIndividuo> lista;
-		try {
-			lista= this.cruce(poblacion.get(ind1), poblacion.get(ind2));
-		}
-		catch(CruceNuloException e){
-			System.out.println(e);
-			return;
-		}
-		poblacion.remove(minpos1);
-		poblacion.remove(minpos2);
-		poblacion.add(lista.get(0));
-		poblacion.add(lista.get(1));	
-		
+		List<IIndividuo> lista = new ArrayList<IIndividuo>();
+		int cont = 0,flag = 0;
+		while(cont < cruces.size()) {
+			while(true) {
+				try {
+					lista= this.cruce(cruces.get(cont), cruces.get(cont +1));
+					break;
+				}
+				catch(CruceNuloException e){
+					if(cruces.get(cont).getExpresion().getRaiz().equals("x") != true || cruces.get(cont+1).getExpresion().getRaiz().equals("x") != true) continue;
+					flag = 1;
+					break;
+				}
+			}
+			if(flag == 0) {
+				poblacion.remove(cruces.get(cont));
+				poblacion.remove(cruces.get(cont+1));
+				poblacion.add(lista.get(0));
+				poblacion.add(lista.get(1));
+			}
+			
+			flag = 0;
+			cont +=2;						
+		}	
 	}
 
 	public void ejecutar(IDominio dominio) throws Exception {
@@ -174,7 +180,7 @@ public class Algoritmo implements IAlgoritmo{
 			}
 			else {
 				System.out.println("GENERACION " + gen);
-				System.out.println("Individuo con mayor fitness(fitness = " + poblacion.get(maxpos).getFitness() + " ): ");
+				System.out.println("Individuo con mayor fitness(fitness = " + max + " ): ");
 				poblacion.get(maxpos).writeIndividuo();
 			}
 			gen++;
