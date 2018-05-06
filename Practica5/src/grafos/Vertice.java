@@ -23,4 +23,7 @@ public class Vertice <T>{
 		return datos;
 	}
 	
+	public String toString() {
+		return (String)datos;
+	}
 }

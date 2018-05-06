@@ -3,11 +3,11 @@ package grafos;
 import java.util.*;
 
 public abstract class Grafo<T> {
-	protected Map<Integer, Vertice<T>> vertices;
-	protected Map<Map<Integer,Integer>,Double> arcos ;
+	protected Map<Integer, Vertice<T>> vertices = new HashMap<Integer,Vertice<T>>();
+	protected Map<Map<Integer,Integer>,Double> arcos = new HashMap<Map<Integer,Integer>,Double>() ;
 	
 	public Vertice<T> addVertice(T datos){
-		Vertice<T> v = new Vertice<T>(vertices.size()-1,datos);
+		Vertice<T> v = new Vertice<T>(vertices.size(),datos);
 		vertices.put(v.getId(), v);
 		return v;
 	}
@@ -37,9 +37,7 @@ public abstract class Grafo<T> {
 		
 	}
 	public int getNumArcos() {
-		int cont = 0;
-		for(int i = 0;i < arcos.size(); i++) cont += arcos.get(i).size();
-		return cont/2;
+		return arcos.size()/2;
 	}
 	
 	public String toString() {// los vértices del grafo han de presentarse ORDENADOS POR IDENTIFICADOR
